@@ -1,0 +1,44 @@
+# Ignorar arquivos gerados pelo npm
+/node_modules
+
+
+# Ignorar arquivos de dependências específicas de desenvolvimento
+npm-debug.log
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar diretório de arquivos temporários
+/tmp
+
+# Ignorar arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar logs e arquivos de saída
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar arquivos de configuração específicos do editor
+.vscode/
+.idea/
+
+# Ignorar arquivos de build
+/build
+
+# Ignorar arquivos de cache
+.cache
+
+# Ignorar arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Ignorar arquivos de dependências de tipo
+*.tsbuildinfo
+
+# Ignorar arquivos de compilação TypeScript
+*.js
+*.map
