@@ -20,45 +20,43 @@ app.get('/images/:name', (req, res) => {
 });
 
 // Function to capture screenshot
-async function captureScreenshot(url, outputPath, delay = 3000) {
+async function captureScreenshot(page, url, outputPath) {
     try {
-        const browser = await puppeteer.launch({
-            headless: true, // Modo headless
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        });
-        const page = await browser.newPage();
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 })
 
-        await page.setViewport({ width: 1920, height: 1080 });
-
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: delay }); // Wait until there are only 2 network connections in 500ms period.
+        await page.setViewport({ width: 1280, height: 720 });
 
         await page.screenshot({ path: outputPath });
-
-        await browser.close();
 
         console.log(`Screenshot captured successfully from ${url} and saved to ${outputPath}`);
     } catch (error) {
         console.error(`Error capturing screenshot from ${url}:`, error);
     }
 }
+
 // Function to update images
 async function updateImages() {
     try {
+        const browser = await puppeteer.launch({
+            headless: true, // Modo headless
+        });
+        const page = await browser.newPage();
+
         // Read the file containing URLs
         const urlsAndNames = fs.readFileSync('./image_urls.txt', 'utf8').split('\n').filter(Boolean);
 
         // Fetch each image from the URLs
-        const imagesPromises = urlsAndNames.map(async (line) => {
+        for (const line of urlsAndNames) {
             const [url, imageName] = line.split('|');
             try {
-                await captureScreenshot(url, `./images/${imageName}`, 5000);
+                await captureScreenshot(page, url, `./images/${imageName}`);
                 console.log(`Image ${imageName} captured successfully!`);
             } catch (error) {
                 console.error(`Error capturing screenshot from ${url}:`, error);
             }
-        });
+        }
 
-        await Promise.all(imagesPromises);
+        await browser.close();
 
         console.log('Images updated successfully!');
     } catch (error) {
