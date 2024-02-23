@@ -24,7 +24,7 @@ async function captureScreenshot(url, outputPath, delay = 3000) {
     try {
         const browser = await puppeteer.launch({
             headless: true, // Modo headless
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] // Necessário para rodar no ambiente da AWS EC2
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
         const page = await browser.newPage();
 
