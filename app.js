@@ -1,6 +1,6 @@
 const express = require('express');
 const cron = require('node-cron');
-const axios = require('axios');
+const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 const app = express();
@@ -19,6 +19,25 @@ app.get('/images/:name', (req, res) => {
     });
 });
 
+// Function to capture screenshot
+async function captureScreenshot(url, outputPath, delay = 3000) {
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        await page.setViewport({ width: 1920, height: 1080 });
+
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: delay }); // Wait until there are only 2 network connections in 500ms period.
+
+        await page.screenshot({ path: outputPath });
+
+        await browser.close();
+
+        console.log(`Screenshot captured successfully from ${url} and saved to ${outputPath}`);
+    } catch (error) {
+        console.error(`Error capturing screenshot from ${url}:`, error);
+    }
+}
 // Function to update images
 async function updateImages() {
     try {
@@ -26,14 +45,13 @@ async function updateImages() {
         const urlsAndNames = fs.readFileSync('./image_urls.txt', 'utf8').split('\n').filter(Boolean);
 
         // Fetch each image from the URLs
-        const imagesPromises = urlsAndNames.map(async (line, index) => {
+        const imagesPromises = urlsAndNames.map(async (line) => {
             const [url, imageName] = line.split('|');
             try {
-                const response = await axios.get(url, { responseType: 'arraybuffer' });
-                fs.writeFileSync(`./images/${imageName}`, response.data);
-                console.log(`Image ${imageName} saved successfully!`);
+                await captureScreenshot(url, `./images/${imageName}`, 5000);
+                console.log(`Image ${imageName} captured successfully!`);
             } catch (error) {
-                console.error(`Error fetching image from ${url}:`, error);
+                console.error(`Error capturing screenshot from ${url}:`, error);
             }
         });
 
