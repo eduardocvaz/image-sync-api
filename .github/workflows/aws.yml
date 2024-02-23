@@ -31,5 +31,4 @@ jobs:
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws configure set region ${{ env.AWS_REGION }}
 
-        aws s3 cp ./db.json s3://githubactions-blogback/db.json
         aws ssm send-command --document-name "AWS-RunShellScript" --targets "Key=instanceids,Values=i-035c3d9c4db2376ef" --parameters "commands='/bin/sh deploy.sh',workingDirectory=/home/ec2-user/image-sync-api"
