@@ -59,9 +59,23 @@
         <h2>Usage</h2>
         <ol>
             <li>Prepare a file named <code>image_urls.txt</code> containing URLs and corresponding image names in the following format:</li>
+
+            <pre class="code-container">
+                <code id="code2">
+                    https://example.com|image1.jpg
+                    https://example.org|image2.jpg
+                </code>
+                <button class="copy-button" onclick="copyCode('code2')">Copy</button>
+            </pre>
+            <li>Configure the schedule for image updates in the <code>schedule_config.txt</code> file. Each line should consist of a description and a cron schedule separated by a pipe ('|') character, for example:</li>
+            <pre class="code-container">
+                <code id="code3">
+                    Daily Update|0 0 * * *
+                    Weekly Update|0 0 * * 0
+                </code>
+                <button class="copy-button" onclick="copyCode('code3')">Copy</button>
+            </pre>
         </ol>
-        <pre class="code-container"><code id="code2">https://example.com|image1.jpg
-https://example.org|image2.jpg</code><button class="copy-button" onclick="copyCode('code2')">Copy</button></pre>
     </section>
 
     <section id="endpoints">
