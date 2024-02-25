@@ -1,5 +1,5 @@
 # Image Sync API
-The "Image Updater" is a Node.js application designed to automate the process of capturing and updating images from specified URLs on a scheduled basis.
+The "Image Sync API" is a Node.js application designed to automate the process of capturing and updating images from specified URLs on a scheduled basis.
 This project leverages technologies such as Puppeteer for webpage manipulation and screenshot capture, Express for serving images through an endpoint, and cron for scheduling tasks.
 https://github.com/eduardocvaz/image-sync-api/tree/master
 ## Key Features
