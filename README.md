@@ -45,12 +45,12 @@ Weekly Update|0 0 * * 0
 ```
 node app.js
 ```
-##Endpoints
-###GET /images/:name
+## Endpoints
+### GET /images/:name
 Retrieve images by specifying the image name as a parameter.
 Example:
 ```
 GET /images/image1.jpg
 ```
-##License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
