@@ -16,3 +16,41 @@ https://github.com/eduardocvaz/image-sync-api/tree/master
 3. **Image Capture and Update**: At each scheduled interval, the application launches a Puppeteer instance, navigates to the specified URLs, captures screenshots, and saves them with the corresponding image names in the ```images``` directory.
 4. **Server Setup**: An Express server is started to serve the captured images through the ```/images/:name``` endpoint.
 5. **Error Handling**: The application includes error handling mechanisms to log and manage errors encountered during the image capture and update process, ensuring smooth operation even in the face of unexpected issues.
+
+
+##Prerequisites
+Before running this project, ensure you have Node.js installed on your machine.
+
+##Installation
+
+1. Clone this repository to your local machine.
+2. Navigate to the project directory in your terminal.
+3.Install dependencies by running the command:
+```
+npm install
+```
+##Usage
+1. Prepare a file named ```image_urls.txt``` containing URLs and corresponding image names in the following format:
+```
+https://example.com|image1.jpg
+https://example.org|image2.jpg
+
+```
+2. Configure the schedule for image updates in the ```schedule_config.txt``` file. Each line should consist of a description and a cron schedule separated by a pipe ('|') character, for example:
+```
+Daily Update|0 0 * * *
+Weekly Update|0 0 * * 0
+```
+3. Start the server by running:
+```
+node app.js
+```
+##Endpoints
+###GET /images/:name
+Retrieve images by specifying the image name as a parameter.
+Example:
+```
+GET /images/image1.jpg
+```
+##License
+This project is licensed under the MIT License - see the LICENSE file for details.
