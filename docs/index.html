@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Sync API</title>
+    <link rel="stylesheet" href="../docs/styles.css">
+</head>
+<body>
+<header>
+    <img src="../docs/images/Image-sync.png" alt="Image Sync API Logo">
+</header>
+<main>
+    <section id="description">
+        <h2>About</h2>
+        <p>The "Image Sync Api" is a Node.js application designed to automate the process of capturing and updating images from specified URLs on a scheduled basis.</p>
+        <p>This project leverages technologies such as Puppeteer for webpage manipulation and screenshot capture, Express for serving images through an endpoint, and cron for scheduling tasks.</p>
+        <p><a href="https://github.com/eduardocvaz/image-sync-api/tree/master">GitHub Repository</a></p>
+    </section>
+
+    <section id="features">
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>Automated Image Capture:</strong> Utilizes Puppeteer to navigate to specified URLs and capture screenshots of web pages.</li>
+            <li><strong>Scheduled Updates:</strong> Allows users to define update schedules in the schedule_config.txt file using cron syntax.</li>
+            <li><strong>Flexible Configuration:</strong> URLs and corresponding image names are configured in the image_urls.txt file, providing flexibility in defining which images to capture and update.</li>
+            <li><strong>Error Handling:</strong> Incorporates error handling mechanisms to gracefully manage issues that may arise during the image update process.</li>
+            <li><strong>RESTful API Endpoint:</strong> Provides a RESTful API endpoint /images/:name for accessing the captured images.</li>
+        </ul>
+    </section>
+
+    <section id="how-it-works">
+        <h2>How It Works</h2>
+        <ol>
+            <li><strong>Configuration:</strong> Users define the URLs and corresponding image names in the <code>image_urls.txt</code> file. Additionally, they specify the update schedules in the <code>schedule_config.txt</code> file using cron syntax.</li>
+            <li><strong>Scheduled Tasks:</strong> The application reads the schedule configuration and sets up cron jobs to trigger image update tasks according to the defined schedules.</li>
+            <li><strong>Image Capture and Update:</strong> At each scheduled interval, the application launches a Puppeteer instance, navigates to the specified URLs, captures screenshots, and saves them with the corresponding image names in the <code>images</code> directory.</li>
+            <li><strong>Server Setup:</strong> An Express server is started to serve the captured images through the <code>/images/:name</code> endpoint.</li>
+            <li><strong>Error Handling:</strong> The application includes error handling mechanisms to log and manage errors encountered during the image capture and update process, ensuring smooth operation even in the face of unexpected issues.</li>
+        </ol>
+    </section>
+
+    <section id="prerequisites">
+        <h2>Prerequisites</h2>
+        <p>Before running this project, ensure you have Node.js installed on your machine.</p>
+    </section>
+
+    <section id="installation">
+        <h2>Installation</h2>
+        <ol>
+            <li>Clone this repository to your local machine.</li>
+            <li>Navigate to the project directory in your terminal.</li>
+            <li>Install dependencies by running the command:</li>
+        </ol>
+        <pre class="code-container"><code id="code1">npm install</code><button class="copy-button" onclick="copyCode('code1')">Copy</button></pre>
+    </section>
+
+    <section id="usage">
+        <h2>Usage</h2>
+        <ol>
+            <li>Prepare a file named <code>image_urls.txt</code> containing URLs and corresponding image names in the following format:</li>
+        </ol>
+        <pre class="code-container"><code id="code2">https://example.com|image1.jpg
+https://example.org|image2.jpg</code><button class="copy-button" onclick="copyCode('code2')">Copy</button></pre>
+    </section>
+
+    <section id="endpoints">
+        <h2>Endpoints</h2>
+        <h3>GET /images/:name</h3>
+        <p>Retrieve images by specifying the image name as a parameter.</p>
+        <p>Example:</p>
+        <pre><code>GET /images/image1.jpg</code></pre>
+    </section>
+
+    <section id="license">
+        <h2>License</h2>
+        <p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+    </section>
+</main>
+<script>
+    function copyCode(id) {
+        var codeBlock = document.getElementById(id);
+        var codeContent = codeBlock.textContent || codeBlock.innerText;
+        copyToClipboard(codeContent);
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            alert('Code copied to clipboard!');
+        }, function(err) {
+            console.error('Failed to copy: ', err);
+        });
+    }
+</script>
+</body>
+</html>
